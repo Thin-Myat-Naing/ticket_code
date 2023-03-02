@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Generate Ticket Code</h1>
+  <div class="input-form">
+   <label for="start">TICKET NUMBER </label>
+    <input type="number" id="start" onkeyup='ticketNumber(this)'/>
+    <br />
+    <br />
+    <label for="money">PRICE </label>
+    <input type="number" id="money" onkeyup='priceNumber(this)'/>     
+    <br />
+    <br />
+    <label for="money">CURRENCY </label>
+    <select name="currency" id="currency" onchange="ddselect(this.selectedIndex);">
+      <option>--- Select Currency ---</option>
+      <option value="MMK">MMK</option>
+      <option value="Yen" id="yen">YEN</option>
+      <option value="MRG">MRG</option>
+      <option value="SGD">SGD</option>
+      <option value="AUD">AUD</option>
+      <option value="USD">USD</option>
+      <option value="THB">THB</option>
+    </select>
+  </div>
+<br/>
+  <div class="outer">
+      <div id="imagewrap" class="wrap">
+        <div class="img-main"></div>
+        <div class="heading">LUCKY DRAW TICKET</div>
+        <span class="date">22 FEB TO 22 APR 23</span>
+        <div id='ticket-number'>TICKET NO. </div>
+        <div class="left-blue">
+          <div id='ticket-numbers'>TICKET NO. 0001 </div>
+          <div id="currency_name">MMK</div>
+          <div id='price'>price</div>
+          <div class="long-date">30 APRIL 2023</div>
+        </div>
+      </div>
+  </div>
+
+   <div id="canvasWrapper" class="outer">
+      <p class="render-btn">Canvas-rendered <button id="rerender">Re-Render!</button></p>
+   </div>
+   <footer>
+    <p>Copyright <span class="copyright">&#169</span> 2023 TM. All rights reserved</footer>
+</body>
+<script>
+   let start_number = document.getElementById("start") ;
+   let money = document.getElementById("money");
+
+
+   let ticketNumber = (ele) => {
+      start_number = ele.value;
+         document.getElementById('ticket-number').innerHTML ="TICKET NO. " + start_number.replace(/\n\r?/g, '<br />');
+         document.getElementById('ticket-numbers').innerHTML ="TICKET NO. " + start_number.replace(/\n\r?/g, '<br />');
+   }
+
+   let priceNumber = (ele) => {
+      money = ele.value;
+         document.getElementById('price').innerHTML = money.replace(/\n\r?/g, '<br />');
+   }
+
+   function ddselect() {
+    var e = document.getElementById("currency");
+	  var strUser = e.value; 
+	  var strUser = e.options[e.selectedIndex].text; 
+    document.getElementById('currency_name').innerHTML = strUser.replace(/\n\r?/g, '<br />');
+   }
+
+    function reRender(src) {
+      html2canvas(document.getElementById("imagewrap"), {
+        onrendered: function(canvas) {
+        canvas.className = "html2canvas";
+        canvas.src ="img-main";
+        document.getElementById("canvasWrapper").appendChild(canvas);
+        var image = canvas.toDataURL("image/jpeg");
+        document.getElementById("downloadLink").href = image;
+      },
+      useCORS: true
+    });
+
+  }
+  document.getElementById("rerender").onclick = reRender;
+
+    
+</script>
+</html>
