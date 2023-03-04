@@ -111,11 +111,12 @@ label {
 }
 #price {
   transform: rotate(270deg);
-  top: -9.9em;
+  top: -11.1em;
   font-size: 60px;
   right: 0px;
-  left: 23.67em;
+  left: 13.4em;
   bottom: 0;
+  width: 100%;
 }
 .long-date {
   transform: rotate(270deg);
