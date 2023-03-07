@@ -18,6 +18,14 @@
   <div class="main">
     <h1>Generate Ticket Code</h1>
     <div class="input-form">
+      <label for="date-limit">Date Limit</label>
+      <input type="text" id="date-limit" onclick='dateLimit(this)'/>
+      <br />
+      <br />
+      <label for="longdate">End date</label>
+      <input type="text" id="longdate" onclick='longDate(this)'/>
+      <br />
+      <br />
       <label for="start">TICKET NUMBER </label>
       <input type="number" id="start" onkeyup='ticketNumber(this)'/>
       <br />
@@ -37,6 +45,8 @@
         <option value="USD">USD</option>
         <option value="THB">THB</option>
       </select>
+      <br />
+      <br />
     </div>
     <br/>
 
@@ -44,13 +54,13 @@
         <div id="imagewrap" class="wrap">
           <div class="img-main"></div>
           <div class="heading">LUCKY DRAW TICKET</div>
-          <span class="date">22 FEB TO 22 APR 23</span>
+          <span id="date">22 FEB TO 22 APR 23</span>
           <div id='ticket-number'>TICKET NO. </div>
           <div class="left-blue">
             <div id='ticket-numbers'>TICKET NO. 0001 </div>
             <div id="currency_name">MMK</div>
             <div id='price'>1000</div>
-            <div class="long-date">30 APRIL 2023</div>
+            <div id="long-date">30 APRIL 2023</div>
           </div>
         </div>
     </div>
@@ -66,7 +76,18 @@
 <script>
    let start_number = document.getElementById("start") ;
    let money = document.getElementById("money");
+   let date_limit = document.getElementById("date-limit");
+   let long_date = document.getElementById("longdate");
 
+
+   let dateLimit = (ele) => {
+    date_limit = ele.value;
+    document.getElementById('date').innerHTML = date_limit.replace(/\n\r?/g, '<br />');
+   }
+   let longDate = (ele) => {
+    long_date = ele.value;
+    document.getElementById('long-date').innerHTML = long_date.replace(/\n\r?/g, '<br />');
+   }
 
    let ticketNumber = (ele) => {
       start_number = ele.value;
